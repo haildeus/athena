@@ -1,0 +1,34 @@
+[project]
+name = "athena"
+version = "0.1.0"
+description = "Placeholder"
+requires-python = ">=3.10"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+# Or you could set a specific version like: target-version = "py310"
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # mccabe
+    "B",  # bugbear
+    "UP", # pyupgrade
+]
+ignore = []  # Add any rules you want to ignore here
+
+# Sort imports
+[tool.isort]
+profile = "black"
+
+# Example: Configure per-file ignores
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # Ignore unused imports in __init__.py 
