@@ -27,12 +27,20 @@ RETURN u, b, r
 CREATE_USER_POSTED_IN_ROOM_QUERY = """
 MATCH (u:User {uuid: $user_uuid}), (r:Room {uuid: $room_uuid})
 MERGE (u)-[p:POSTED_IN]->(r)
-ON CREATE SET p.created_at = $created_at, p.updated_at = $updated_at
-ON MATCH SET p.updated_at = $updated_at
+ON CREATE SET p.created_at = $created_at, p.updated_at = $updated_at, p.count = 1
+ON MATCH SET p.updated_at = $updated_at, p.count = coalesce(p.count, 0) + 1
 RETURN u, p, r
 """
 
-# --- Topic Edge Queries ---
+# --- Cluster Edge Queries ---
+CREATE_CLUSTER_RELATED_TO_ROOM_QUERY = """
+MATCH (c:Cluster {uuid: $cluster_uuid}), (r:Room {uuid: $room_uuid})
+MERGE (c)-[r:RELATED_TO]->(r)
+ON CREATE SET r.created_at = $created_at, r.updated_at = $updated_at
+ON MATCH SET r.updated_at = $updated_at
+RETURN c, r, r
+"""
+
 CREATE_CLUSTER_RELATED_TO_TOPIC_QUERY = """
 MATCH (c:Cluster {uuid: $cluster_uuid}), (t:Entity {uuid: $topic_uuid})
 MERGE (c)-[r:RELATED_TO]->(t)
@@ -41,6 +49,7 @@ ON MATCH SET r.updated_at = $updated_at
 RETURN c, r, t
 """
 
+# --- Topic Edge Queries ---
 CREATE_USER_RELATED_TO_TOPIC_QUERY = """
 MATCH (u:User {uuid: $user_uuid}), (t:Entity {uuid: $topic_uuid})
 MERGE (u)-[r:RELATED_TO]->(t)
