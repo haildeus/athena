@@ -60,6 +60,14 @@ class OrganonEdge(BaseModel, ABC):
 
 
 # --- Relationship Models ---
+class Posts(OrganonEdge):
+    def connect(
+        self, node1: OrganonNode, node2: OrganonNode
+    ) -> tuple[str, dict[str, Any]]:
+        """Connect two nodes."""
+        raise NotImplementedError("Not implemented")
+
+
 class PostedIn(OrganonEdge):
     supported_pairs = [
         (Message, Room),
@@ -78,6 +86,22 @@ class PostedIn(OrganonEdge):
             return CREATE_MESSAGE_POSTED_IN_ROOM_QUERY
 
         raise ValueError("Unexpected error")
+
+
+class Mentions(OrganonEdge):
+    def connect(
+        self, node1: OrganonNode, node2: OrganonNode
+    ) -> tuple[str, dict[str, Any]]:
+        """Connect two nodes."""
+        raise NotImplementedError("Not implemented")
+
+
+class Includes(OrganonEdge):
+    def connect(
+        self, node1: OrganonNode, node2: OrganonNode
+    ) -> tuple[str, dict[str, Any]]:
+        """Connect two nodes."""
+        raise NotImplementedError("Not implemented")
 
 
 class BelongsTo(OrganonEdge):
@@ -104,6 +128,30 @@ class BelongsTo(OrganonEdge):
             return CREATE_USER_BELONGS_TO_ROOM_QUERY
 
         raise ValueError("Unexpected error")
+
+
+class ParticipatesIn(OrganonEdge):
+    def connect(
+        self, node1: OrganonNode, node2: OrganonNode
+    ) -> tuple[str, dict[str, Any]]:
+        """Connect two nodes."""
+        raise NotImplementedError("Not implemented")
+
+
+class HasPreference(OrganonEdge):
+    def connect(
+        self, node1: OrganonNode, node2: OrganonNode
+    ) -> tuple[str, dict[str, Any]]:
+        """Connect two nodes."""
+        raise NotImplementedError("Not implemented")
+
+
+class For(OrganonEdge):
+    def connect(
+        self, node1: OrganonNode, node2: OrganonNode
+    ) -> tuple[str, dict[str, Any]]:
+        """Connect two nodes."""
+        raise NotImplementedError("Not implemented")
 
 
 class RelatedTo(OrganonEdge):
