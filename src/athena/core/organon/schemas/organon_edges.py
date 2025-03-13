@@ -180,14 +180,6 @@ class RelatedTo(OrganonEdge):
         raise ValueError("Unexpected error")
 
 
-class HasPreference(OrganonEdge):
-    def connect(
-        self, node1: OrganonNode, node2: OrganonNode
-    ) -> tuple[str, dict[str, Any]]:
-        """Connect two nodes."""
-        raise NotImplementedError("Not implemented")
-
-
 class Expresses(OrganonEdge):
     def connect(
         self, node1: OrganonNode, node2: OrganonNode
