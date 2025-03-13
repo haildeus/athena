@@ -1,10 +1,8 @@
 import uvloop
 
-from .system import logger, system_config, diskcache
-from .deus.base.base_instance import Deus
 from .deus.athena.athena_instance import Athena
-from .deus.base.base_instance import DeusAbstract
-
+from .deus.base.base_instance import Deus, DeusAbstract
+from .system import diskcache, logger, system_config
 
 uvloop.install()
 
